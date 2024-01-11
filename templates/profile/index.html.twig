@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('./css/profile.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-container">
+        <h1>Mon Profil</h1>
+        <div class="personal-info">
+            <h2>Informations Personnelles</h2>
+            <p><strong>Nom:</strong> <span id="clientName">{{user.nom}} {{user.prenom}}</span></p>
+            <p><strong>Email:</strong> <span id="clientEmail">{{user.mail}}</span></p>
+            <p><strong>Téléphone:</strong> <span id="clientPhone">{{user.tel}}</span></p>
+            <p><strong>Date de naissance:</strong> <span id="clientPhone">{{user.dateNaissance|date('d/m/Y')}}</span></p>
+        </div>
+        <div class="appointment-history">
+            <h2>Historique des Rendez-vous</h2>
+            <ul>
+                {% for rdv in rendezVous %}
+                {% if rdv.getDateRdv|date('Y-d-m') < dateActuelle|date('Y-m-d') %}
+                <li class="appointment-past">
+                    <strong>Date:</strong> {{ rdv.getDateRdv|date('m/d/Y') }} à {{rdv.getIdCreneaux.horaireD|date('H:i')}} - 
+                    <strong>Kinésithérapeute:</strong> {{ rdv.getIdKine.nom }} - 
+                    <strong>Spécialité:</strong> {{ rdv.getIdKine.specialite.libelle }}
+                </li>
+                {% else %}
+                <li class="appointment-futur">
+                    <strong>Date:</strong> {{ rdv.getDateRdv|date('m/d/Y') }} à {{rdv.getIdCreneaux.horaireD|date('H:i')}} - 
+                    <strong>Kinésithérapeute:</strong> {{ rdv.getIdKine.nom }} - 
+                    <strong>Spécialité:</strong> {{ rdv.getIdKine.specialite.libelle }}
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <a class="btn btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+    </div>
+</div>
+{% endblock %}

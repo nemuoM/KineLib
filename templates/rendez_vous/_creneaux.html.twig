@@ -1,0 +1,46 @@
+{# templates/kine/_creneaux.html.twig #}
+
+<div class="semaine">
+    {% for jour in lesJours %}
+        <div class="jour">
+            {% set dateDuJour = datesDeLaSemaine[loop.index0] %}
+            <h3>{{ jour.libelle }} - {{ dateDuJour|date('d/m/Y') }}</h3>
+            <div class="creneaux">
+                {% set creneauxDuJour = creneaux|filter(creneauKine => creneauKine.idCreneaux.idJour.id == jour.id) %}
+                
+                {% if creneauxDuJour|length > 0 %}
+                    {% for creneauKine in creneauxDuJour %}
+                        <div class="creneau">
+                            {% set creneauPris = false %}
+                            {% for rdv in lesRdv %}
+                                {% if creneauKine.idCreneaux.id == rdv.idCreneaux.id and idKine == rdv.idKine.id %}
+                                    {% set creneauPris = true %}
+                                    <button type="button" class="btn btn-danger creneau-btn" disabled
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#confirmationModal"
+                                            data-creneau-id="{{ creneauKine.idCreneaux.id }}"
+                                            data-creneau-date="{{ dateDuJour|date('d/m/Y') }}"
+                                            data-creneau-heure="{{ creneauKine.idCreneaux.horaireD|date('H:i') }}">
+                                        {{ creneauKine.idCreneaux.horaireD|date('H:i') }}
+                                    </button>
+                                {% endif %}
+                            {% endfor %}
+                            {% if not creneauPris %}
+                                <button type="button" class="btn btn-success creneau-btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#confirmationModal"
+                                        data-creneau-id="{{ creneauKine.idCreneaux.id }}"
+                                        data-creneau-date="{{ dateDuJour|date('d/m/Y') }}"
+                                        data-creneau-heure="{{ creneauKine.idCreneaux.horaireD|date('H:i') }}">
+                                    {{ creneauKine.idCreneaux.horaireD|date('H:i') }}
+                                </button>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Aucun créneau disponible.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

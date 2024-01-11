@@ -1,0 +1,45 @@
+.semaine {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 85px;
+    margin-bottom: 80px;
+}
+
+.jour {
+    flex: 1;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.creneaux {
+    display: flex;
+    flex-direction: column;
+}
+
+.creneau {
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.vide {
+    text-align: center;
+    margin-top: 300px;
+    margin-bottom: 300px;
+}
+
+.creneau-btn {
+    width: 100%;
+}
+
+.btn-confirm {
+    background: #5c62b8;
+    color: white;
+}
+.btn-confirm:hover {
+    background: #4d539b;
+    color: white;
+}

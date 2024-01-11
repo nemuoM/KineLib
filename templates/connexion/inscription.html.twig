@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - KineLib</title>
+    <link rel="stylesheet" href="{{ asset('css/inscription.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Inscription sur KineLib</h1>
+            <p>Rejoignez-nous pour planifier vos séances de kinésithérapie facilement</p>
+        </header>
+        <section class="signup-form">
+            {{ form_start(inscriptionForm, {'attr': {'class': 'custom-form-class'}}) }}
+                <div class="form-group">
+                    <label for="fullname"> Nom: </label>
+                    {{ form_widget(inscriptionForm.nom, {'attr': {'class': 'custom-class'}}) }}
+                    {{ form_errors(inscriptionForm.nom) }}
+                </div>
+                <div class="form-group">
+                    <label for="name"> Prénom: </label>
+                    {{ form_widget(inscriptionForm.prenom, {'attr': {'class': 'custom-class'}}) }}
+                    {{ form_errors(inscriptionForm.prenom) }}
+                </div>
+                <div class="form-group">
+                    <label for="mail"> Adresse-mail: </label>
+                    {{ form_widget(inscriptionForm.mail, {'attr': {'class': 'custom-class'}}) }}
+                    {{ form_errors(inscriptionForm.mail) }}
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    {{ form_widget(inscriptionForm.mdp, {'attr': {'class': 'custom-class'}}) }}
+                    {{ form_errors(inscriptionForm.mdp) }}
+                </div>
+                <div class="form-group">
+                    <label for="phone">Numéro de téléphone :</label>
+                    {{ form_widget(inscriptionForm.tel, {'attr': {'class': 'custom-class'}}) }}
+                    {{ form_errors(inscriptionForm.tel) }}
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date de naissance :</label>
+                    {{ form_widget(inscriptionForm.dateNaissance, {'attr': {'class': 'custom-class'}}) }}
+                    {{ form_errors(inscriptionForm.dateNaissance) }}
+                </div>
+                <button type="submit" class="btnInsc">S'inscrire</button>
+            <a href="/">Déjà inscrit ? Se connecter</a>
+            {{ form_end(inscriptionForm) }}
+        </section>
+    </div>
+</body>
+</html>

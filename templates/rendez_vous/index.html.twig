@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prendre rendez-vous{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('./css/rdv.css')}}">
+{% endblock %}
+
+{% block content %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    </style>
+
+    {# Modal #}
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Confirmation de Rendez-vous</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Confirmez-vous votre rendez-vous pour le <span id="selectedDate"></span> à <span id="selectedTime"></span> avec le <span id="selectedDoctor"></span> ?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-confirm" id="confirmRdvBtn">Confirmer</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="example-wrapper">
+        <select id="kineSelect" class="form-select" aria-label="Default select example">
+            <option value="" selected>Veuillez sélectionner un Kine</option>
+            {% for kine in lesKines %}
+                <option value="{{kine.id}}">Dr. {{kine.nom}} {{kine.prenom}} ({{kine.specialite.libelle}})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div id="creneauxContainer">
+        <div class="semaine">
+            {% for jour in lesJours %}
+                <div class="jour">
+                    <h3>{{ jour.libelle }}</h3>
+                    <div class="creneaux">
+                        
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h1 class="vide"> Veuillez sélectionner un kinésithérapeute </h1>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('./js/agenda.js')}}"></script>
+    <script src="{{asset('./js/confirm.js')}}"></script>
+{% endblock %}
